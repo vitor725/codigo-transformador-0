@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Juros e Montante</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('sua-imagem.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            text-align: center;
+        }
+        #form {
+            width: 50%;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="number"] {
+            width: 90%;
+            height: 90%;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #cccccc;
+        }
+        button {
+            width: 100%;
+            height: 60px;
+            background-color: #4CAF50;
+            color: #ffffffeb;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Juros </h1>
+    <form id="form">
+        <label for="capital">Capital:</label>
+        <input type="number" id="capital" required>
+        <br>
+        <label for="taxa">Taxa de Juros:</label>
+        <input type="number" id="taxa" required>
+        <br>
+        <label for="tempo">Tempo:</label>
+        <input type="number" id="tempo" required>
+        <br>
+        <button id="calcular">Calcular</button>
+    </form>
+    <script>
+        const form = document.getElementById('form');
+        const calcular = document.getElementById('calcular');
+
+        calcular.addEventListener('click', (e) => {
+            e.preventDefault();
+            const capital = parseFloat(document.getElementById('capital').value);
+            const taxa = parseFloat(document.getElementById('taxa').value);
+            const tempo = parseFloat(document.getElementById('tempo').value);
+            const juros = capital * taxa * tempo / 100;
+            const montante = capital + juros;
+            localStorage.setItem('juros', juros);
+            localStorage.setItem('montante', montante);
+            localStorage.setItem('capital', capital);
+            window.location.href = 'grafico.html';
+        });
+    </script>
+</body>
+</html>
+

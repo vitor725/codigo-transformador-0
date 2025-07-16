@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>grafico</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-image: url('imagem-grafico.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            text-align: center;
+        }
+        #valores {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0 auto;
+            margin-top: 20px;
+            font-size: 18px;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+    <h1>grafico de Juros e Montante</h1>
+    <canvas id="grafico" width="400" height="200"></canvas>
+    <div id="valores">
+        <p>Capital: <span id="capital"></span></p>
+        <p>Juros: <span id="juros"></span></p>
+        <p>Montante: <span id="montante"></span></p>
+    </div>
+    <script>
+        const juros = parseFloat(localStorage.getItem('juros'));
+        const montante = parseFloat(localStorage.getItem('montante'));
+        const capital = parseFloat(localStorage.getItem('capital'));
+
+        document.getElementById('capital').innerText = capital.toFixed(2);
+        document.getElementById('juros').innerText = juros.toFixed(2);
+        document.getElementById('montante').innerText = montante.toFixed(2);
+
+        const ctx = document.getElementById('grafico').getContext('2d');
+        const grafico = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Capital', 'Juros', 'Montante'],
+                datasets: [{
+                    label: 'Valores',
+                    data: [capital, juros, montante],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
